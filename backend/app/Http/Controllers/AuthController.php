@@ -98,9 +98,12 @@ class AuthController extends Controller
     private function respondWithToken(string $accessToken, User $user)
     {
         $payload = JWTAuth::factory()
-            ->customClaims(['refresh' => true])
             ->setTTL(self::REFRESH_TTL_MINUTES)
-            ->make(['sub' => $user->getJWTIdentifier()]);
+            ->customClaims([
+                'sub' => $user->getJWTIdentifier(),
+                'refresh' => true,
+            ])
+            ->make();
 
         $refreshToken = (string) JWTAuth::manager()->encode($payload);
 
