@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use PHPOpenSourceSaver\JWTAuth\Exceptions\JWTException;
-use PHPOpenSourceSaver\JWTAuth\JWTAuth;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -76,6 +75,11 @@ class AuthController extends Controller
 
         try {
             $payload = JWTAuth::setToken($refreshToken)->getPayload();
+
+            if (!$payload->get('refresh')) {
+                throw new JWTException('Token is not a refresh token');
+            }
+
             $user = User::find($payload->get('sub'));
             if (!$user) {
                 throw new JWTException('User not found');
