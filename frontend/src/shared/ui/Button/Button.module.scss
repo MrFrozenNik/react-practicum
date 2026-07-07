@@ -1,6 +1,6 @@
 @use '@/shared/styles/mixins' as *;
 
-.button{
+.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -11,23 +11,65 @@
   border: var(--border-width-base) solid transparent;
   background: transparent;
   transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--color-gray-400); // 9ca3af
+  }
 }
 
-.small{
+.small {
   gap: calc(var(--spacing) * 2); // 8px
   padding-inline: calc(var(--spacing) * 2); // 8px
   @include text(sm);
 }
 
-.base{
+.base {
   gap: calc(var(--spacing) * 2.5); // 10px
   padding-inline: calc(var(--spacing) * 3); // 12px
   @include text(base);
 }
 
-.large{
+.large {
   gap: calc(var(--spacing) * 3); // 12px
   padding-inline: calc(var(--spacing) * 4); // 16px
   @include text(lg);
 }
 
+$statuses: (
+        primary: indigo,
+        info: blue,
+        success: green,
+        warning: amber,
+        danger: red,
+);
+
+@each $name, $family in $statuses {
+  @include status-color($name, $family);
+}
+
+.status-default {
+  --btn-bg: var(--color-gray-100);
+  --btn-bg-hover: var(--color-gray-200);
+  --btn-bg-active: var(--color-gray-300);
+  --btn-bg-loading: var(--color-gray-300);
+  --btn-text: var(--color-gray-900);
+}
+
+.kind-filled   { @include kind-variant($bg: true, $border: true, $text: true); }
+.kind-outlined { @include kind-variant($border: true); }
+.kind-dashed   { @include kind-variant($border: true); border-style: dashed; }
+.kind-text     { @include kind-variant(); }
+
+.spinner {
+  width: 1em;
+  height: 1em;
+  border-radius: var(--radius-full);
+  border: var(--border-width-2) solid var(--color-gray-200);
+  border-top-color: var(--color-white);
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
