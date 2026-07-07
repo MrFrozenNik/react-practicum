@@ -1,7 +1,7 @@
+import styles from './Button.module.scss'
 export const Button = ()=> {
     return <>
-
-        <div className="m-3 flex m-0">
+        <div className={styles.m3333}>
             Hello
         </div>
     </>
