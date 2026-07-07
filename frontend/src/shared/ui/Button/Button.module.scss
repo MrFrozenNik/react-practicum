@@ -1,1 +1,33 @@
-.m3333 { margin: calc(var(--spacing) * 3); }
+@use '@/shared/styles/mixins' as *;
+
+.button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base); // 4px
+  padding-block: calc(var(--spacing) * 2); // 8px
+  user-select: none;
+  cursor: pointer;
+  border: var(--border-width-base) solid transparent;
+  background: transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.small{
+  gap: calc(var(--spacing) * 2); // 8px
+  padding-inline: calc(var(--spacing) * 2); // 8px
+  @include text(sm);
+}
+
+.base{
+  gap: calc(var(--spacing) * 2.5); // 10px
+  padding-inline: calc(var(--spacing) * 3); // 12px
+  @include text(base);
+}
+
+.large{
+  gap: calc(var(--spacing) * 3); // 12px
+  padding-inline: calc(var(--spacing) * 4); // 16px
+  @include text(lg);
+}
+
