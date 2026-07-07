@@ -1,4 +1,5 @@
 @use 'variables';
+
 @mixin text($size) {
   font-size: var(--font-size-#{$size});
   line-height: var(--line-height-#{$size});
@@ -9,6 +10,7 @@
     --btn-bg: var(--color-#{$family}-700);
     --btn-bg-hover: var(--color-#{$family}-800);
     --btn-bg-active: var(--color-#{$family}-900);
+    --btn-bg-loading: var(--color-#{$family}-900);
     --btn-text: #{$text};
   }
 }
@@ -18,13 +20,13 @@
   border-color: if($border, var(--btn-bg), transparent);
   color: if($text, var(--btn-text), var(--btn-bg));
 
-  &:hover:not(:disabled) {
+  &:hover:not(:disabled):not(.loading) {
     @if $bg { background-color: var(--btn-bg-hover); }
     @if $border { border-color: var(--btn-bg-hover); }
     @if not $text { color: var(--btn-bg-hover); }
   }
 
-  &:active:not(:disabled) {
+  &:active:not(:disabled):not(.loading) {
     @if $bg { background-color: var(--btn-bg-active); }
     @if $border { border-color: var(--btn-bg-active); }
     @if not $text { color: var(--btn-bg-active); }
@@ -32,11 +34,11 @@
 
   &.loading {
     cursor: wait;
-    @if $bg { background-color: var(--btn-bg-loading); }
-    @if $border { border-color: var(--btn-bg-loading); }
+    background-color: var(--btn-bg-loading);
+    border-color: var(--btn-bg-loading);
   }
 
-  &:disabled {
+  &:disabled:not(.loading) {
     background-color: if($bg, var(--color-gray-200), transparent);
     border-color: if($border, var(--color-gray-200), transparent);
   }
