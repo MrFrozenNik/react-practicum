@@ -113,7 +113,7 @@ class AuthController extends Controller
             self::REFRESH_TTL_MINUTES,
             '/',
             null,
-            true,
+            config('cookie.secure'),
             true,
             false,
             'Lax'
