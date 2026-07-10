@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
 
         if (error.response?.status !== 401 || originalRequest._retry) return Promise.reject(error);
 
-        const authUrls = ["/login", "/register", "/refresh"];
+        const authUrls = ["/auth/login", "/auth/register", "/auth/refresh"];
         if (authUrls.some((u) => originalRequest.url?.includes(u))) {
             return Promise.reject(error);
         }
@@ -43,7 +43,7 @@ apiClient.interceptors.response.use(
         isRefreshing = true;
 
         try{
-            const {data} = await apiClient.post("/refresh");
+            const {data} = await apiClient.post("/auth/refresh");
             tokenStorage.set(data.access_token);
             isRefreshing = false;
             queue.forEach((cb) => cb(null));

@@ -1,14 +1,16 @@
-
-import {Button} from "@/shared/ui";
+import { LoginForm } from "@/features/login";
+import { useUser } from "@/entities/user";
 
 function App() {
+    const { user, isLoading, isAuthenticated } = useUser();
 
+    if (isLoading) return <p>Загрузка...</p>;
 
-  return (
-    <>
-      <Button > Hu</Button>
-    </>
-  )
+    return (
+        <>
+            {isAuthenticated ? <p>Привет, {user?.name}!</p> : <LoginForm />}
+        </>
+    );
 }
 
-export default App
+export default App;
