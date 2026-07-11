@@ -1,10 +1,9 @@
-import {Button} from "@/shared/ui";
 import {useState} from "react";
-import {useUser} from "@/entities/user";
 import {useForm, Controller} from "react-hook-form";
-import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
+import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {login, LoginError} from "@/features/login/api/login.ts";
+import {useUser} from "@/entities/user";import {Button} from "@/shared/ui";
 
 
 export const LoginForm = () => {

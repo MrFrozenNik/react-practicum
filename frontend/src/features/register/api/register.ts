@@ -1,7 +1,6 @@
-import {apiClient} from "@/shared/api";
-import {getMe} from "@/entities/user";
-import {tokenStorage} from "@/shared/api/token-storage.ts";
 import {AxiosError} from "axios";
+import {getMe} from "@/entities/user";import {apiClient} from "@/shared/api";
+import {tokenStorage} from "@/shared/api/token-storage.ts";
 
 
 interface RegisterPayload {

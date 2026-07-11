@@ -1,10 +1,9 @@
-import { Button } from "@/shared/ui";
 import { useState } from "react";
-import { useUser } from "@/entities/user";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { type RegisterFormValues, registerSchema } from "@/features/register/model/schema.ts";
 import { register, RegisterError } from "@/features/register/api/register.ts";
+import { useUser } from "@/entities/user";import { Button } from "@/shared/ui";
 
 export const RegisterForm = () => {
     const { setUser } = useUser();

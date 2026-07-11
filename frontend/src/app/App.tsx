@@ -1,6 +1,6 @@
 import { LoginForm } from "@/features/login";
-import { useUser } from "@/entities/user";
 import {RegisterForm} from "@/features/register";
+import { useUser } from "@/entities/user";
 
 function App() {
     const { user, isLoading, isAuthenticated } = useUser();
