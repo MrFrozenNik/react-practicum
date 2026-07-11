@@ -1,7 +1,7 @@
 import {Button} from "@/shared/ui";
 import {useState} from "react";
 import {useUser} from "@/entities/user";
-import {useForm} from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {login, LoginError} from "@/features/login/api/login.ts";
@@ -12,7 +12,7 @@ export const LoginForm = () => {
     const [serverError, setServerError] = useState<string | null>(null);
 
     const {
-        register,
+        control,
         handleSubmit,
         formState: { errors, isSubmitting },
     } = useForm<LoginFormValues>({ resolver: yupResolver(loginSchema) });
@@ -31,12 +31,34 @@ export const LoginForm = () => {
     return(
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div>
-                <input type="email" placeholder="Email" {...register("email")} />
+                <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => (
+                        <input
+                            {...field}
+                            type="email"
+                            placeholder="Email"
+                            autoComplete="username"
+                        />
+                    )}
+                />
                 {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
             </div>
 
             <div>
-                <input type="password" placeholder="Пароль" {...register("password")} />
+                <Controller
+                    name="password"
+                    control={control}
+                    render={({ field }) => (
+                        <input
+                            {...field}
+                            type="password"
+                            placeholder="Пароль"
+                            autoComplete="current-password"
+                        />
+                    )}
+                />
                 {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
             </div>
 
