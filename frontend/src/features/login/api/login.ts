@@ -32,7 +32,7 @@ export const login = async (payload: LoginPayload) => {
                 throw new LoginError(422, "Fields filled incorrectly");
             }
         }
-        throw new LoginError(0, "Server error")
+        throw new LoginError(0, "Unable to login");
     }
 
 }
