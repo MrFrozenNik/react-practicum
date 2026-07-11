@@ -16,9 +16,23 @@
 }
 
 @mixin kind-variant($bg: false, $border: false, $text: false) {
-  background-color: if($bg, var(--btn-bg), transparent);
-  border-color: if($border, var(--btn-bg), transparent);
-  color: if($text, var(--btn-text), var(--btn-bg));
+  @if $bg {
+    background-color: var(--btn-bg);
+  } @else {
+    background-color: transparent;
+  }
+
+  @if $border {
+    border-color: var(--btn-bg);
+  } @else {
+    border-color: transparent;
+  }
+
+  @if $text {
+    color: var(--btn-text);
+  } @else {
+    color: var(--btn-bg);
+  }
 
   &:hover:not(:disabled):not(.loading) {
     @if $bg { background-color: var(--btn-bg-hover); }
@@ -39,7 +53,15 @@
   }
 
   &:disabled:not(.loading) {
-    background-color: if($bg, var(--color-gray-200), transparent);
-    border-color: if($border, var(--color-gray-200), transparent);
+    @if $bg {
+      background-color: var(--color-gray-200);
+    } @else {
+      background-color: transparent;
+    }
+    @if $border {
+      border-color: var(--color-gray-200);
+    } @else {
+      border-color: transparent;
+    }
   }
 }
