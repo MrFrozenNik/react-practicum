@@ -1,18 +1,20 @@
-import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { type RegisterFormValues, registerSchema } from "@/features/register/model/schema.ts";
-import { register, RegisterError } from "@/features/register/api/register.ts";
-import { useUser } from "@/entities/user";import { Button } from "@/shared/ui";
+import {useState} from "react";
+import {useForm, Controller} from "react-hook-form";
+import {yupResolver} from "@hookform/resolvers/yup";
+import {type RegisterFormValues, registerSchema} from "@/features/register/model/schema.ts";
+import {register, RegisterError} from "@/features/register/api/register.ts";
+import styles from "./RegisterForm.module.scss";
+import {useUser} from "@/entities/user";
+import {Button, Input, Text} from "@/shared/ui";
 
 export const RegisterForm = () => {
-    const { setUser } = useUser();
+    const {setUser} = useUser();
     const [serverError, setServerError] = useState<string | null>(null);
 
     const {
         control,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: {errors, isSubmitting},
     } = useForm<RegisterFormValues>({
         resolver: yupResolver(registerSchema),
     });
@@ -28,74 +30,76 @@ export const RegisterForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div>
-                <Controller
-                    name="name"
-                    control={control}
-                    render={({ field }) => (
-                        <input
-                            {...field}
-                            type="text"
-                            placeholder="Имя пользователя"
-                            autoComplete="username"
-                        />
-                    )}
-                />
-                {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
-            </div>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Text as="h1" size="4xl" weight="bold" className={styles.title}>
+                Регистрация
+            </Text>
 
-            <div>
-                <Controller
-                    name="email"
-                    control={control}
-                    render={({ field }) => (
-                        <input
-                            {...field}
-                            type="email"
-                            placeholder="Email"
-                            autoComplete="email"
-                        />
-                    )}
-                />
-                {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
-            </div>
-
-            <div>
-                <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => (
-                        <input
-                            {...field}
-                            type="password"
-                            placeholder="Пароль"
-                            autoComplete="new-password"
-                        />
-                    )}
-                />
-                {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
-            </div>
-
-            <div>
-                <Controller
-                    name="password_confirmation"
-                    control={control}
-                    render={({ field }) => (
-                        <input
-                            {...field}
-                            type="password"
-                            placeholder="Подтвердите пароль"
-                            autoComplete="new-password"
-                        />
-                    )}
-                />
-                {errors.password_confirmation && (
-                    <p style={{ color: "red" }}>{errors.password_confirmation.message}</p>
+            <Controller
+                name="name"
+                control={control}
+                render={({field}) => (
+                    <Input
+                        {...field}
+                        type="text"
+                        label="Имя пользователя"
+                        placeholder="Имя пользователя"
+                        autoComplete="username"
+                        error={errors.name?.message}
+                    />
                 )}
-            </div>
+            />
 
-            {serverError && <p style={{ color: "red" }}>{serverError}</p>}
+            <Controller
+                name="email"
+                control={control}
+                render={({field}) => (
+                    <Input
+                        {...field}
+                        type="email"
+                        label="Email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
+                        error={errors.email?.message}
+                    />
+                )}
+            />
+
+            <Controller
+                name="password"
+                control={control}
+                render={({field}) => (
+                    <Input
+                        {...field}
+                        type="password"
+                        label="Пароль"
+                        placeholder="Пароль"
+                        autoComplete="new-password"
+                        error={errors.password?.message}
+                    />
+                )}
+            />
+
+            <Controller
+                name="password_confirmation"
+                control={control}
+                render={({field}) => (
+                    <Input
+                        {...field}
+                        type="password"
+                        label="Подтвердите пароль"
+                        placeholder="Подтвердите пароль"
+                        autoComplete="new-password"
+                        error={errors.password_confirmation?.message}
+                    />
+                )}
+            />
+
+            {serverError && (
+                <Text size="sm" weight="medium" className={styles.serverError}>
+                    {serverError}
+                </Text>
+            )}
 
             <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Регистрация..." : "Зарегистрироваться"}

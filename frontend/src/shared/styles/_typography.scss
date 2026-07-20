@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+$sizes: xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, 8xl, 9xl;
+$weights: regular, medium, semibold, bold;
+
+@mixin text-style($size, $weight: regular) {
+  font-size: var(--font-size-#{$size});
+  line-height: var(--line-height-#{$size});
+  font-weight: var(--font-weight-#{$weight});
+}
+
+@each $size in $sizes {
+  .text-#{$size} {
+    font-size: var(--font-size-#{$size});
+    line-height: var(--line-height-#{$size});
+  }
+}
+
+@each $weight in $weights {
+  .font-#{$weight} {
+    font-weight: var(--font-weight-#{$weight});
+  }
+}

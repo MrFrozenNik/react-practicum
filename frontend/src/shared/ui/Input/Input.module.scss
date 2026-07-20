@@ -1,0 +1,107 @@
+@use '@/shared/styles/mixins' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  margin-bottom: calc(var(--spacing) * 1); // 4px
+  color: var(--color-gray-700);
+  font-weight: var(--font-weight-medium);
+  @include text(sm);
+}
+
+.required {
+  color: var(--color-red-600);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: var(--radius-base);
+  border: var(--border-width-base) solid var(--color-gray-300);
+  background: var(--color-white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-gray-400);
+  }
+
+  &:focus-within {
+    border-color: var(--color-indigo-600);
+    box-shadow: 0 0 0 3px var(--color-indigo-100);
+  }
+}
+
+
+.small {
+  padding-inline: calc(var(--spacing) * 3);
+  padding-block: calc(var(--spacing) * 2);
+  @include text(sm);
+}
+
+.base {
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  @include text(base);
+}
+
+.large {
+  padding-inline: calc(var(--spacing) * 4);
+  padding-block: calc(var(--spacing) * 2);
+  @include text(lg);
+}
+
+.control {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-gray-900);
+  font: inherit;
+
+  &::placeholder {
+    color: var(--color-gray-400);
+  }
+}
+
+.caption {
+  display: block;
+  margin-top: calc(var(--spacing) * 1); // 4px
+  color: var(--color-gray-500);
+  @include text(xs);
+}
+
+.error {
+  color: var(--color-red-600);
+}
+
+.status-danger {
+  border-color: var(--color-red-500);
+
+  &:focus-within {
+    border-color: var(--color-red-600);
+    box-shadow: 0 0 0 3px var(--color-red-100);
+  }
+}
+
+.readonly {
+  background: var(--color-gray-50);
+  border-color: var(--color-gray-200);
+}
+
+.disabled {
+  background: var(--color-gray-100);
+  border-color: var(--color-gray-200);
+  cursor: not-allowed;
+
+  .control {
+    cursor: not-allowed;
+    color: var(--color-gray-400);
+  }
+}

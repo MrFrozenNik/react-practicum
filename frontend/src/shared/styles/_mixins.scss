@@ -1,4 +1,5 @@
-@use 'variables';
+@use 'variables' as *;
+@use 'sass:map';
 
 @mixin text($size) {
   font-size: var(--font-size-#{$size});
@@ -35,15 +36,27 @@
   }
 
   &:hover:not(:disabled):not(.loading) {
-    @if $bg { background-color: var(--btn-bg-hover); }
-    @if $border { border-color: var(--btn-bg-hover); }
-    @if not $text { color: var(--btn-bg-hover); }
+    @if $bg {
+      background-color: var(--btn-bg-hover);
+    }
+    @if $border {
+      border-color: var(--btn-bg-hover);
+    }
+    @if not $text {
+      color: var(--btn-bg-hover);
+    }
   }
 
   &:active:not(:disabled):not(.loading) {
-    @if $bg { background-color: var(--btn-bg-active); }
-    @if $border { border-color: var(--btn-bg-active); }
-    @if not $text { color: var(--btn-bg-active); }
+    @if $bg {
+      background-color: var(--btn-bg-active);
+    }
+    @if $border {
+      border-color: var(--btn-bg-active);
+    }
+    @if not $text {
+      color: var(--btn-bg-active);
+    }
   }
 
   &.loading {
@@ -63,5 +76,29 @@
     } @else {
       border-color: transparent;
     }
+  }
+}
+
+
+@mixin breakpoint($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Неизвестный breakpoint: #{$name}';
+  }
+
+  @media (min-width: map.get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+
+@mixin breakpoint-max($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Неизвестный breakpoint: #{$name}';
+  }
+
+  $value: map.get($breakpoints, $name) - 0.02rem;
+
+  @media (max-width: $value) {
+    @content;
   }
 }

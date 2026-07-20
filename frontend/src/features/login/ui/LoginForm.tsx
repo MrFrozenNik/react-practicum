@@ -3,8 +3,9 @@ import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {login, LoginError} from "@/features/login/api/login.ts";
-import {useUser} from "@/entities/user";import {Button} from "@/shared/ui";
-
+import styles from "./LoginForm.module.scss";
+import {useUser} from "@/entities/user";
+import {Button, Input, Text} from "@/shared/ui";
 
 export const LoginForm = () => {
     const {setUser} = useUser();
@@ -26,46 +27,51 @@ export const LoginForm = () => {
         }
     };
 
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div>
-                <Controller
-                    name="email"
-                    control={control}
-                    render={({field}) => (
-                        <input
-                            {...field}
-                            type="email"
-                            placeholder="Email"
-                            autoComplete="username"
-                        />
-                    )}
-                />
-                {errors.email && <p style={{color: "red"}}>{errors.email.message}</p>}
-            </div>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Text as="h1" size="4xl" weight="bold" className={styles.title}>
+                Вход
+            </Text>
 
-            <div>
-                <Controller
-                    name="password"
-                    control={control}
-                    render={({field}) => (
-                        <input
-                            {...field}
-                            type="password"
-                            placeholder="Пароль"
-                            autoComplete="current-password"
-                        />
-                    )}
-                />
-                {errors.password && <p style={{color: "red"}}>{errors.password.message}</p>}
-            </div>
+            <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        {...field}
+                        type="email"
+                        label="Email"
+                        placeholder="you@example.com"
+                        autoComplete="username"
+                        error={errors.email?.message}
+                    />
+                )}
+            />
 
-            {serverError && <p style={{color: "red"}}>{serverError}</p>}
+            <Controller
+                name="password"
+                control={control}
+                render={({ field }) => (
+                    <Input
+                        {...field}
+                        type="password"
+                        label="Пароль"
+                        placeholder="Пароль"
+                        autoComplete="current-password"
+                        error={errors.password?.message}
+                    />
+                )}
+            />
+
+            {serverError && (
+                <Text size="sm" weight="medium" className={styles.serverError}>
+                    {serverError}
+                </Text>
+            )}
 
             <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Вход..." : "Войти"}
             </Button>
         </form>
-    )
-}
+    );
+};
