@@ -1,7 +1,6 @@
 import {Route, Routes} from "react-router-dom";
 import {MainLayout} from "@/app/layouts/main-layout";
-import {LoginForm} from "@/features/login";
-import {RegisterForm} from "@/features/register";
+import {AuthPage} from "@/pages/auth-page";
 import {useUser} from "@/entities/user";
 
 function App() {
@@ -17,12 +16,7 @@ function App() {
                     123
                 </>}/>
             </Route>
-            <Route path="/auth" element={<>
-                логин:
-                {isAuthenticated ? <p>Привет, {user?.name}!</p> : <LoginForm/>}
-                регистер:
-                {isAuthenticated ? <p>Привет, {user?.name}!</p> : <RegisterForm/>}
-            </>}/>
+            <Route path="/auth" element={<AuthPage/>}/>
         </Routes>
 
     );
