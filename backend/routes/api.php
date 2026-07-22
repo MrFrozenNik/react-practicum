@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
 Route::group([
@@ -23,4 +24,14 @@ Route::group([
 Route::middleware(['api', 'auth:api'])->prefix('profile')->group(function () {
     Route::patch('name', [ProfileController::class, 'updateName']);
     Route::patch('password', [ProfileController::class, 'updatePassword']);
+});
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [ProductController::class, 'index']);
+
+    Route::middleware(['auth:api', 'admin'])->group(function () {
+        Route::post('/', [ProductController::class, 'store']);
+        Route::patch('/{product}', [ProductController::class, 'update']);
+        Route::delete('/{product}', [ProductController::class, 'destroy']);
+    });
 });
