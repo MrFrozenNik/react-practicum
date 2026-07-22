@@ -15,6 +15,7 @@
   border: var(--border-width-base) solid var(--color-gray-200);
   border-radius: var(--radius-base);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: max-content;
 
   &:popover-open {
     display: flex;
@@ -35,7 +36,7 @@
   text-decoration: none;
   cursor: pointer;
   @include text(sm);
-
+  white-space: nowrap;
   &:hover {
     background: var(--color-gray-100);
   }
