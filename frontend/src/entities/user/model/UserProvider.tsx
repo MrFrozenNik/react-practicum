@@ -1,14 +1,18 @@
-import { useState, useEffect, type PropsWithChildren } from "react";
-import { UserContext } from "./UserContext";
-import { getMe } from "../api/getMe";
-import type { User } from "./types";
+import {useState, useEffect, type PropsWithChildren} from "react";
+import {UserContext} from "./UserContext";
+import {getMe} from "../api/getMe";
+import type {User} from "./types";
+import {tokenStorage} from "@/shared/api/token-storage.ts";
 
-export const UserProvider = ({ children }: PropsWithChildren) => {
+export const UserProvider = ({children}: PropsWithChildren) => {
     const [user, setUser] = useState<User | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        const handleLogout = () => setUser(null);
+        const handleLogout = () => {
+            tokenStorage.set(null);
+            setUser(null);
+        };
         window.addEventListener("auth:logout", handleLogout);
         return () => window.removeEventListener("auth:logout", handleLogout);
     }, []);
@@ -21,7 +25,7 @@ export const UserProvider = ({ children }: PropsWithChildren) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ user, isLoading, isAuthenticated: user !== null, setUser }}>
+        <UserContext.Provider value={{user, isLoading, isAuthenticated: user !== null, setUser}}>
             {children}
         </UserContext.Provider>
     );
