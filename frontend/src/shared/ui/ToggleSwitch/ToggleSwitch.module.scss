@@ -1,0 +1,31 @@
+.root {
+  display: inline-flex;
+  border-radius: var(--radius-full);
+  background: var(--color-gray-100);
+  padding: 2px;
+  width: 100%;
+}
+
+.option {
+  flex: 1;
+  padding-block: calc(var(--spacing) * 1.5);
+  padding-inline: calc(var(--spacing) * 4);
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--color-gray-600);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background 0.2s, color 0.2s;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-indigo-500);
+    outline-offset: 2px;
+  }
+}
+
+.active {
+  background: var(--color-indigo-600);
+  color: white;
+}

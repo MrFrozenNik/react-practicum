@@ -13,6 +13,7 @@ export const DropdownItem = <T extends ElementType = 'button'>(
         className,
         disabled,
         onClick,
+        children,
         ...props
     }: DropdownItemProps<T>) => {
     const context = useDropdownContext();
@@ -30,6 +31,6 @@ export const DropdownItem = <T extends ElementType = 'button'>(
         }}
         {...props}
     >
-
+        {children}
     </Tag>
 }
