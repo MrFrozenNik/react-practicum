@@ -1,6 +1,6 @@
 import {Navigate, Outlet} from "react-router-dom";
-import {LoadingPlaceholder} from "@/widgets/loading-placeholder";
 import {useUser} from "@/entities/user";
+import {LoadingPlaceholder} from "@/shared/ui/loading-placeholder";
 
 type ProtectedRouteProps = {
     requireAdmin?: boolean;

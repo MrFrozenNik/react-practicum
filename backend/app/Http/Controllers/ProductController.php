@@ -14,6 +14,11 @@ class ProductController extends Controller
         return response()->json(Product::orderBy('created_at', 'desc')->get());
     }
 
+    public function show(Product $product): JsonResponse
+    {
+        return response()->json($product);
+    }
+
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [

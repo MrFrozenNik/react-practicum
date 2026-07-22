@@ -4,3 +4,4 @@ export {Input} from "./Input"
 export {Dropdown} from './Dropdown';
 export {ToggleSwitch} from './ToggleSwitch';
 export {Icon} from './Icon';
+export {LoadingPlaceholder} from "./loading-placeholder";

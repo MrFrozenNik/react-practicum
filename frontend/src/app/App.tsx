@@ -3,21 +3,19 @@ import {MainLayout} from "@/app/layouts/main-layout";
 import {ProtectedRoute} from "@/app/routes";
 import {AuthPage} from "@/pages/auth-page";
 import {ProfilePage} from "@/pages/profile-page";
-import {LoadingPlaceholder} from "@/widgets/loading-placeholder";
+import {HomePage} from "@/pages/home-page";
 import {useUser} from "@/entities/user";
+import {LoadingPlaceholder} from "@/shared/ui/loading-placeholder";
 
 function App() {
-    const {user, isLoading, isAuthenticated} = useUser();
+    const {isLoading} = useUser();
 
     if (isLoading) return <LoadingPlaceholder/>;
 
     return (
         <Routes>
             <Route element={<MainLayout/>}>
-                <Route index path="/" element={<>
-                    {isAuthenticated && <p>Привет, {user?.name}</p>}
-                    123
-                </>}/>
+                <Route index path="/" element={<HomePage />}/>
                 <Route element={<ProtectedRoute/>}>
                     <Route path="/profile" element={<ProfilePage/>}/>
                 </Route>
