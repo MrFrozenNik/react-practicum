@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing) * 4);
+  max-width: 24rem;
+  width: 100%;
+}
+
+.title {
+  margin-bottom: calc(var(--spacing) * 2);
+}
+
+.serverError {
+  color: var(--color-red-600);
+}
+
+.successMessage {
+  color: var(--color-green-600);
+}
