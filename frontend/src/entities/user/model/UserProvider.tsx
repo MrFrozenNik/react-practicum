@@ -6,7 +6,7 @@ import {tokenStorage} from "@/shared/api/token-storage.ts";
 
 export const UserProvider = ({children}: PropsWithChildren) => {
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(() => Boolean(tokenStorage.get()));
 
     useEffect(() => {
         const handleLogout = () => {
@@ -18,6 +18,8 @@ export const UserProvider = ({children}: PropsWithChildren) => {
     }, []);
 
     useEffect(() => {
+        if (!tokenStorage.get()) return;
+
         getMe()
             .then((restoredUser) => setUser(restoredUser))
             .catch(() => setUser(null))

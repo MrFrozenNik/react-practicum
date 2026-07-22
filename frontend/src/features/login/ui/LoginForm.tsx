@@ -15,7 +15,13 @@ export const LoginForm = () => {
         control,
         handleSubmit,
         formState: {errors, isSubmitting},
-    } = useForm<LoginFormValues>({resolver: yupResolver(loginSchema)});
+
+    } = useForm<LoginFormValues>({
+        resolver: yupResolver(loginSchema), defaultValues: {
+            email: "",
+            password: "",
+        },
+    });
 
     const onSubmit = async (values: LoginFormValues) => {
         setServerError(null);
@@ -36,7 +42,7 @@ export const LoginForm = () => {
             <Controller
                 name="email"
                 control={control}
-                render={({ field }) => (
+                render={({field}) => (
                     <Input
                         {...field}
                         type="email"
@@ -51,7 +57,7 @@ export const LoginForm = () => {
             <Controller
                 name="password"
                 control={control}
-                render={({ field }) => (
+                render={({field}) => (
                     <Input
                         {...field}
                         type="password"

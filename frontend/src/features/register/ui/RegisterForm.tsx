@@ -17,6 +17,12 @@ export const RegisterForm = () => {
         formState: {errors, isSubmitting},
     } = useForm<RegisterFormValues>({
         resolver: yupResolver(registerSchema),
+        defaultValues: {
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+        },
     });
 
     const onSubmit = async (values: RegisterFormValues) => {
