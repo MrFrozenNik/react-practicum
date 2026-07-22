@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 Route::group([
 
@@ -17,5 +18,9 @@ Route::group([
         Route::get('me', [AuthController::class, 'me']);
         Route::post('logout', [AuthController::class, 'logout']);
     });
+});
 
+Route::middleware(['api', 'auth:api'])->prefix('profile')->group(function () {
+    Route::patch('name', [ProfileController::class, 'updateName']);
+    Route::patch('password', [ProfileController::class, 'updatePassword']);
 });

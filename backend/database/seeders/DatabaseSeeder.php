@@ -26,5 +26,16 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        $admin = User::updateOrCreate(
+            ['email' => 'admin@test.com'],
+            [
+                'name' => 'Admin User',
+                'password' => Hash::make('admin'),
+                'email_verified_at' => now(),
+            ]
+        );
+        $admin->is_admin = true;
+        $admin->save();
     }
 }
