@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from 'react';
+import type {ComponentPropsWithoutRef, ElementType} from 'react';
 import clsx from 'clsx';
 import styles from './Button.module.scss';
 
@@ -6,20 +6,35 @@ type ButtonStatus = 'default' | 'primary' | 'info' | 'success' | 'warning' | 'da
 type ButtonKind = 'filled' | 'outlined' | 'dashed' | 'text';
 type ButtonSize = 'small' | 'base' | 'large';
 
-type ButtonProps = ComponentPropsWithoutRef<'button'> & {
+type ButtonOwnProps<T extends ElementType> = {
+    as?: T;
     status?: ButtonStatus;
     kind?: ButtonKind;
     size?: ButtonSize;
     loading?: boolean;
 };
 
-export const Button =
-    ({children, status = 'primary', kind = 'filled', size = 'base', loading = false, disabled, className, ...props}: ButtonProps) => {
+type ButtonProps<T extends ElementType> = ButtonOwnProps<T> &
+    Omit<ComponentPropsWithoutRef<T>, keyof ButtonOwnProps<T>>;
 
+const defaultElement = 'button';
+
+export const Button = <T extends ElementType = typeof defaultElement>({
+                                                                          as,
+                                                                          children,
+                                                                          status = 'primary',
+                                                                          kind = 'filled',
+                                                                          size = 'base',
+                                                                          loading = false,
+                                                                          disabled,
+                                                                          className,
+                                                                          ...props
+                                                                      }: ButtonProps<T>) => {
+    const Component = as || defaultElement;
     const isDisabled = disabled || loading;
 
     return (
-        <button
+        <Component
             className={clsx(
                 styles.button,
                 styles[size],
@@ -28,11 +43,10 @@ export const Button =
                 loading && styles.loading,
                 className,
             )}
-            disabled={isDisabled}
-            aria-busy={loading}
+            disabled={Component === defaultElement ? isDisabled : undefined}
             {...props}
         >
-            {loading ? <span className={styles.spinner} /> : children}
-        </button>
+            {loading ? <span className={styles.spinner}/> : children}
+        </Component>
     );
 };

@@ -27,6 +27,7 @@ export const DropdownMenu = ({className, children}: DropdownMenuProps) => {
             const rect = trigger.getBoundingClientRect();
             menu.style.top = `${rect.bottom + 4}px`;
             menu.style.left = `${rect.left}px`;
+            menu.style.width = `${rect.width}px`;
         };
 
         menu.addEventListener('toggle', handleToggle);
