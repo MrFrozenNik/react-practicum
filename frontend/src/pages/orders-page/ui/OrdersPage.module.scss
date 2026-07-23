@@ -1,0 +1,9 @@
+.page {
+  flex-direction: column;
+  gap: calc(var(--spacing) * 4);
+}
+
+.list {
+  flex-direction: column;
+  gap: calc(var(--spacing) * 3);
+}

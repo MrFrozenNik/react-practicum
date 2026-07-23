@@ -1,0 +1,7 @@
+.card {
+  flex-direction: column;
+  gap: calc(var(--spacing) * 2);
+  border-radius: 12px;
+  border: var(--border-width-base) solid var(--color-gray-200);
+}
+

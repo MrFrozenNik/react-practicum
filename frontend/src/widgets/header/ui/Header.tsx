@@ -7,8 +7,9 @@ import {Dropdown} from "@/shared/ui";
 
 const NAV_LINKS = [
     {label: "Каталог", to: "/"},
-    {label: "Корзина", to: "/"},
-    {label: "Админка", to: "#"},
+    {label: "Корзина", to: "/cart"},
+    {label: "Заказы", to: "/orders"},
+    {label: "Админка", to: "/orders"}
 ];
 
 export const Header = () => {

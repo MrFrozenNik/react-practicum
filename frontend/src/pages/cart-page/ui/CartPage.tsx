@@ -20,7 +20,7 @@ export const CartPage = () => {
     };
 
     return (
-        <div className={clsx(styles.page, "flex container px-4 py-6")}>
+        <div className={clsx(styles.page, "flex container py-6")}>
             <Text as="h1" size="2xl" weight="semibold">Корзина</Text>
 
             {items.length === 0 ? (
