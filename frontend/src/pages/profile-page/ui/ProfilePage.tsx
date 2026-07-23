@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./ProfilePage.module.scss";
 import {UpdateNameForm} from "@/features/update-name";
 import {UpdatePasswordForm} from "@/features/update-password";
@@ -8,8 +9,8 @@ export const ProfilePage = () => {
     const {user} = useUser();
 
     return (
-        <div className={styles.page}>
-            <Text as="h1" size="4xl" weight="bold" className={styles.title}>
+        <div className={clsx(styles.page, "container flex pb-8")}>
+            <Text as="h1" size="4xl" weight="bold" className="">
                 Личный кабинет
             </Text>
 
@@ -17,7 +18,7 @@ export const ProfilePage = () => {
                 Роль: {user?.is_admin ? "Администратор" : "Пользователь"}
             </Text>
 
-            <div className={styles.forms}>
+            <div className={clsx(styles.forms, "flex")}>
                 <UpdateNameForm/>
                 <UpdatePasswordForm/>
             </div>

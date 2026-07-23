@@ -35,6 +35,7 @@ export const Header = () => {
                         <Dropdown kind="filled" status="default" size="small">
                             <Dropdown.Trigger>{user?.name}</Dropdown.Trigger>
                             <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to="/profile">Личный кабинет</Dropdown.Item>
                                 <Dropdown.Item onClick={() => logout()}>Выйти</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>

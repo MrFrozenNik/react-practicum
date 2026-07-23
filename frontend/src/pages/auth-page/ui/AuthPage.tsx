@@ -1,18 +1,19 @@
+import {Navigate} from "react-router-dom";
 import {LoginForm} from "@/features/login";
 import {RegisterForm} from "@/features/register";
-import {logout, useUser} from "@/entities/user";
-
+import {useUser} from "@/entities/user";
 
 export const AuthPage = () => {
-    const {user, isAuthenticated} = useUser();
-    return <>
-        логин:
-        {isAuthenticated ? <p>Привет, {user?.name}!</p> : <LoginForm/>}
-        регистер:
-        {isAuthenticated ? <p>Привет, {user?.name}!</p> : <RegisterForm/>}
+    const {isAuthenticated} = useUser();
 
-        <button onClick={() => {logout()}}>
-            Выход
-        </button>
-    </>
-}
+    if (isAuthenticated) {
+        return <Navigate to="/" replace/>;
+    }
+
+    return (
+        <>
+            <LoginForm/>
+            <RegisterForm/>
+        </>
+    );
+};

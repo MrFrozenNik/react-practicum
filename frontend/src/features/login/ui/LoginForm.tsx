@@ -1,6 +1,8 @@
 import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import clsx from "clsx";
+import {useNavigate} from "react-router-dom";
 import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {login, LoginError} from "@/features/login/api/login.ts";
 import styles from "./LoginForm.module.scss";
@@ -10,6 +12,7 @@ import {Button, Input, Text} from "@/shared/ui";
 export const LoginForm = () => {
     const {setUser} = useUser();
     const [serverError, setServerError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
     const {
         control,
@@ -28,14 +31,15 @@ export const LoginForm = () => {
         try {
             const user = await login(values);
             setUser(user);
+            navigate("/");
         } catch (err) {
             setServerError(err instanceof LoginError ? err.message : "Something went wrong");
         }
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Text as="h1" size="4xl" weight="bold" className={styles.title}>
+        <form className={clsx(styles.form, "flex")} onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Text as="h1" size="4xl" weight="bold" className="mb-2">
                 Вход
             </Text>
 
