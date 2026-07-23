@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -39,7 +41,18 @@ class DatabaseSeeder extends Seeder
         $admin->is_admin = true;
         $admin->save();
 
-        Product::factory()->count(11)->create();
+        Product::factory()->count(24)->create();
+        $testUser = User::where('email', 'test@test.com')->first();
+
+        Order::factory()
+            ->count(5)
+            ->create(['user_id' => $testUser->id])
+            ->each(function (Order $order) {
+                OrderItem::factory()
+                    ->count(fake()->numberBetween(1, 4))
+                    ->for($order)
+                    ->create();
+            });
 
     }
 }

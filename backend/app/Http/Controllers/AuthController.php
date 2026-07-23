@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\User;
@@ -16,14 +17,15 @@ class AuthController extends Controller
     private const REFRESH_COOKIE = 'refresh_token';
     private const REFRESH_TTL_MINUTES = 60 * 24 * 14;
 
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
@@ -38,13 +40,14 @@ class AuthController extends Controller
         return $this->respondWithToken($accessToken, $user);
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
@@ -55,21 +58,24 @@ class AuthController extends Controller
 
         return $this->respondWithToken($accessToken, auth('api')->user());
     }
+
     public function me(Request $request)
     {
         return response()->json(auth('api')->user());
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         auth('api')->logout();
         return response()->json(['message' => 'Successfully logged out'])
             ->withCookie(Cookie::forget(self::REFRESH_COOKIE));
     }
 
-    public function refresh(Request $request){
+    public function refresh(Request $request)
+    {
         $refreshToken = $request->cookie(self::REFRESH_COOKIE);
 
-        if(!$refreshToken){
+        if (!$refreshToken) {
             return response()->json(['error' => 'Refresh token is missing'], 401);
         }
 
@@ -105,7 +111,7 @@ class AuthController extends Controller
             ])
             ->make();
 
-        $refreshToken = (string) JWTAuth::manager()->encode($payload);
+        $refreshToken = (string)JWTAuth::manager()->encode($payload);
 
         $cookie = Cookie::make(
             self::REFRESH_COOKIE,

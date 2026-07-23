@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    public function updateName(Request $request): JsonResponse{
+    public function updateName(Request $request): JsonResponse
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
         ]);
@@ -23,7 +24,8 @@ class ProfileController extends Controller
         return response()->json($user);
     }
 
-    public function updatePassword(Request $request): JsonResponse{
+    public function updatePassword(Request $request): JsonResponse
+    {
         $validator = Validator::make($request->all(), [
             'current_password' => 'required|string',
             'password' => 'required|string|min:8|confirmed',

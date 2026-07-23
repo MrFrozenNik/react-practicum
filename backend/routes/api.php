@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 
@@ -34,4 +35,10 @@ Route::prefix('products')->group(function () {
         Route::patch('/{product}', [ProductController::class, 'update']);
         Route::delete('/{product}', [ProductController::class, 'destroy']);
     });
+});
+
+Route::middleware(['api', 'auth:api'])->prefix('orders')->group(function () {
+    Route::get('/', [OrderController::class, 'index']);
+    Route::get('/{order}', [OrderController::class, 'show']);
+    Route::post('/', [OrderController::class, 'store']);
 });
