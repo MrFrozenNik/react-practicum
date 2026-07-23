@@ -1,12 +1,17 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {useAddToCart} from "@/features/add-to-cart";
 import {getProduct, type Product, ProductDetails} from "@/entities/product";
+import {useCart} from "@/entities/cart";
 import {Button, LoadingPlaceholder} from "@/shared/ui";
 
 export const ProductPage = () => {
     const {id} = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const {items, removeItem} = useCart();
+    const addToCart = useAddToCart();
 
     useEffect(() => {
         if (!id) return;
@@ -18,9 +23,15 @@ export const ProductPage = () => {
     if (loading) return <LoadingPlaceholder/>;
     if (!product) return <p>Товар не найден</p>;
 
+    const inCart = items.some((i) => i.productId === product.id)
+
     return <div className="container">
         <Button as="a" href="/" kind="text" status="primary" className="px-0 pt-2"> {String("<- Назад")}</Button>
-        <ProductDetails product={product} onAddToCart={() => {
-        }}/>
+        <ProductDetails
+            product={product}
+            inCart={inCart}
+            onAddToCart={addToCart}
+            onRemoveFromCart={(p) => removeItem(p.id)}
+        />
     </div>
-};
+};        
