@@ -3,13 +3,16 @@ import {createRoot} from 'react-dom/client'
 import {BrowserRouter} from "react-router-dom";
 import App from '@/app/App.tsx'
 import {UserProvider} from "@/entities/user";
+import {CartProvider} from "@/entities/cart";
 import '@/shared/styles/index.scss';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <BrowserRouter>
             <UserProvider>
-                <App/>
+                <CartProvider>
+                    <App/>
+                </CartProvider>
             </UserProvider>
         </BrowserRouter>
     </StrictMode>,

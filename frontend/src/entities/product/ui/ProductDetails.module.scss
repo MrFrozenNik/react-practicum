@@ -1,0 +1,22 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.description {
+  color: var(--color-gray-500);
+  line-height: var(--line-height-lg);
+}
+
+.meta {
+  color: var(--color-gray-400);
+}
+
+.footer {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}

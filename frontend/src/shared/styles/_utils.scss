@@ -1,4 +1,7 @@
 @use 'sass:math';
+@use 'sass:string';
+@use 'sass:list';
+@use 'sass:meta';
 @use 'variables';
 
 .flex {
@@ -45,10 +48,10 @@
 @function escape-dot($value) {
   $string: #{$value};
   $result: '';
-  $length: str-length($string);
+  $length: string.length($string);
 
   @for $i from 1 through $length {
-    $char: str-slice($string, $i, $i);
+    $char: string.slice($string, $i, $i);
 
     @if $char == '.' {
       $result: $result + '\\.';
@@ -63,8 +66,8 @@
 $spacing: 0.25rem;
 
 $sizes: ();
-@for $i from 0 through 8 {
-  $sizes: append($sizes, $i * 0.5);
+@for $i from 0 through 16 {
+  $sizes: list.append($sizes, $i * 0.5);
 }
 
 
@@ -90,7 +93,10 @@ $properties: (
     $escaped-size: escape-dot($size);
 
     .#{$prefix}-#{$escaped-size} {
-      $props-list: if(type-of($props) == 'list', $props, ($props));
+      $props-list: ($props);
+      @if meta.type-of($props) == 'list' {
+        $props-list: $props;
+      }
 
       @each $prop in $props-list {
         #{$prop}: calc(var(--spacing) * #{$size});

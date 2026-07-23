@@ -6,9 +6,9 @@ import {Button, Icon} from "@/shared/ui";
 import {Dropdown} from "@/shared/ui";
 
 const NAV_LINKS = [
-    {label: "Главная", to: "/"},
-    {label: "Каталог", to: "#"},
-    {label: "Корзина", to: "#"},
+    {label: "Каталог", to: "/"},
+    {label: "Корзина", to: "/"},
+    {label: "Админка", to: "#"},
 ];
 
 export const Header = () => {
