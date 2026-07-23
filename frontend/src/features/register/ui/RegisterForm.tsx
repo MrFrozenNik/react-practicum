@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import clsx from "clsx";
 import {type RegisterFormValues, registerSchema} from "@/features/register/model/schema.ts";
 import {register, RegisterError} from "@/features/register/api/register.ts";
@@ -13,7 +13,9 @@ export const RegisterForm = () => {
     const {setUser} = useUser();
     const [serverError, setServerError] = useState<string | null>(null);
     const navigate = useNavigate();
-    
+    const location = useLocation();
+    const from = (location.state as {from?: {pathname: string}} | null)?.from?.pathname ?? "/";
+
     const {
         control,
         handleSubmit,
@@ -33,7 +35,7 @@ export const RegisterForm = () => {
         try {
             const user = await register(values);
             setUser(user);
-            navigate("/");
+            navigate(from, {replace: true});
         } catch (err) {
             setServerError(err instanceof RegisterError ? err.message : "Something went wrong");
         }

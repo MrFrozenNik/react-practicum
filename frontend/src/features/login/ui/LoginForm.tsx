@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import clsx from "clsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 import {type LoginFormValues, loginSchema} from "@/features/login/model/schema.ts";
 import {login, LoginError} from "@/features/login/api/login.ts";
 import styles from "./LoginForm.module.scss";
@@ -13,6 +13,8 @@ export const LoginForm = () => {
     const {setUser} = useUser();
     const [serverError, setServerError] = useState<string | null>(null);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = (location.state as {from?: {pathname: string}} | null)?.from?.pathname ?? "/";
 
     const {
         control,
@@ -31,7 +33,7 @@ export const LoginForm = () => {
         try {
             const user = await login(values);
             setUser(user);
-            navigate("/");
+            navigate(from, {replace: true});
         } catch (err) {
             setServerError(err instanceof LoginError ? err.message : "Something went wrong");
         }

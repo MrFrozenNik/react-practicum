@@ -1,0 +1,8 @@
+.page {
+  flex-direction: column;
+  gap: calc(var(--spacing) * 4);
+}
+
+.back {
+  align-self: flex-start;
+}

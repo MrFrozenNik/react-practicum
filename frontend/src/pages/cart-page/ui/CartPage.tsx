@@ -1,9 +1,10 @@
 import {useState} from "react";
 import clsx from "clsx";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import styles from "./CartPage.module.scss";
 import {useCreateOrder} from "@/features/create-order";
 import {CartItemRow, useCart} from "@/entities/cart";
+import {useUser} from "@/entities/user";
 import {Button, Text} from "@/shared/ui";
 import {formatPrice} from "@/shared/lib/formatPrice";
 
@@ -12,8 +13,14 @@ export const CartPage = () => {
     const [comment, setComment] = useState("");
     const navigate = useNavigate();
     const {submit, isSubmitting, error} = useCreateOrder();
+    const {isAuthenticated} = useUser();
+    const location = useLocation();
 
     const handleSubmit = async () => {
+        if (!isAuthenticated) {
+            navigate("/auth", {state: {from: location}});
+            return;
+        }
         const order = await submit(comment);
         if (order) {
             navigate("/orders");
@@ -56,4 +63,4 @@ export const CartPage = () => {
             </Button>
         </div>
     );
-};   
+};
