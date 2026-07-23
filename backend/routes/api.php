@@ -41,4 +41,5 @@ Route::middleware(['api', 'auth:api'])->prefix('orders')->group(function () {
     Route::get('/', [OrderController::class, 'index']);
     Route::get('/{order}', [OrderController::class, 'show']);
     Route::post('/', [OrderController::class, 'store']);
+    Route::middleware('admin')->patch('/{order}/status', [OrderController::class, 'updateStatus']);
 });

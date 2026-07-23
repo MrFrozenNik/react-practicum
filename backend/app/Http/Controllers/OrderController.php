@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\OrderStatus;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
 {
@@ -72,5 +74,20 @@ class OrderController extends Controller
         });
 
         return response()->json($order->load('items'), 201);
+    }
+
+    public function updateStatus(Request $request, Order $order): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'status' => ['required', Rule::enum(OrderStatus::class)],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $order->update(['status' => $validator->validated()['status']]);
+
+        return response()->json($order->load('items'));
     }
 }
