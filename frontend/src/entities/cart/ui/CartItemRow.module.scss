@@ -1,0 +1,13 @@
+.row {
+  gap: calc(var(--spacing) * 4);
+  padding: calc(var(--spacing) * 3) 0;
+  border-bottom: var(--border-width-base) solid var(--color-gray-200);
+}
+
+.title {
+  flex: 1;
+}
+
+.quantity {
+  gap: calc(var(--spacing) * 2);
+}

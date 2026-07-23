@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type {Product} from "../model/types";
-import {formatPrice} from "../lib/formatPrice";
 import styles from "./ProductDetails.module.scss";
+import {formatPrice} from "@/shared/lib/formatPrice";
 import {Button, Text} from "@/shared/ui";
 
 type ProductDetailsProps = {

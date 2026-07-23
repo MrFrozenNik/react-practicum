@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import {Link} from "react-router-dom";
 import type {Product} from "../model/types";
-import {formatPrice} from "../lib/formatPrice";
 import styles from "./ProductCard.module.scss";
+import {formatPrice} from "@/shared/lib/formatPrice";
 import {Button, Text} from "@/shared/ui";
 
 type ProductCardProps = {
