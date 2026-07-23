@@ -11,6 +11,11 @@ export interface OrderItem {
 export interface Order {
     id: number;
     user_id: number;
+    user: {
+        id: number;
+        name: string;
+        email: string;
+    } | null;
     comment: string | null;
     status: OrderStatus;
     items: OrderItem[];

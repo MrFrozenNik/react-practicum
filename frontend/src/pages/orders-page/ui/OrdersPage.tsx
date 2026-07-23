@@ -37,10 +37,14 @@ export const OrdersPage = () => {
                 <div className={clsx(styles.list, "flex")}>
                     {orders.map((order) => (
                         <div key={order.id}>
-                            <OrderCard order={order}/>
-                            {user?.is_admin && (
-                                <OrderStatusSelect order={order} onUpdated={handleOrderUpdated}/>
-                            )}
+                            <OrderCard
+                                key={order.id}
+                                order={order}
+                                showUser={user?.is_admin}
+                                actions={user?.is_admin && (
+                                    <OrderStatusSelect order={order} onUpdated={handleOrderUpdated}/>
+                                )}
+                            />
                         </div>
                     ))}
                 </div>

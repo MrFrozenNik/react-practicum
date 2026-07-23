@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import type {ReactNode} from "react";
 import type {Order} from "../model/types";
 import styles from "./OrderCard.module.scss";
 import {Text} from "@/shared/ui";
@@ -11,7 +12,14 @@ const statusLabels: Record<Order["status"], string> = {
     cancelled: "Отменён",
 };
 
-export const OrderCard = ({order}: { order: Order }) => {
+
+type OrderCardProps = {
+    order: Order;
+    showUser?: boolean;
+    actions?: ReactNode;
+};
+
+export const OrderCard = ({order, showUser = false, actions}: OrderCardProps) => {
     const total = order.items.reduce(
         (sum, item) => sum + Number(item.price) * item.quantity,
         0
@@ -23,6 +31,12 @@ export const OrderCard = ({order}: { order: Order }) => {
                 <Text as="span" weight="semibold">Заказ #{order.id}</Text>
                 <Text as="span">{statusLabels[order.status]}</Text>
             </div>
+
+            {showUser && order.user && (
+                <Text as="p" size="sm">
+                    Заказчик: {order.user.name} ({order.user.email})
+                </Text>
+            )}
 
             <Text as="p" size="sm">
                 {new Date(order.created_at).toLocaleDateString("ru-RU")}
@@ -41,6 +55,11 @@ export const OrderCard = ({order}: { order: Order }) => {
             )}
 
             <Text as="span" weight="semibold">{formatPrice(String(total))}</Text>
+            {actions && (
+                <div className="mt-2">
+                    {actions}
+                </div>
+            )}
         </article>
     );
 };

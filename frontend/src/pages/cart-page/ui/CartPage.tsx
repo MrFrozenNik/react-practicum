@@ -5,6 +5,7 @@ import styles from "./CartPage.module.scss";
 import {useCreateOrder} from "@/features/create-order";
 import {CartItemRow, useCart} from "@/entities/cart";
 import {Button, Text} from "@/shared/ui";
+import {formatPrice} from "@/shared/lib/formatPrice";
 
 export const CartPage = () => {
     const {items} = useCart();
@@ -18,6 +19,8 @@ export const CartPage = () => {
             navigate("/orders");
         }
     };
+
+    const total = items.reduce((sum, item) => sum + Number(item.price) * item.quantity, 0);
 
     return (
         <div className={clsx(styles.page, "flex container py-6")}>
@@ -49,7 +52,7 @@ export const CartPage = () => {
                 disabled={items.length === 0 || isSubmitting}
                 onClick={handleSubmit}
             >
-                {isSubmitting ? "Оформляем..." : "Сформировать заказ"}
+                {isSubmitting ? "Оформляем..." : `Сформировать заказ · ${formatPrice(String(total))}`}
             </Button>
         </div>
     );

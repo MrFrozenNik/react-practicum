@@ -17,7 +17,7 @@ class OrderController extends Controller
     {
         $user = auth('api')->user();
 
-        $query = Order::with('items')->orderBy('created_at', 'desc');
+        $query = Order::with(['items', 'user'])->orderBy('created_at', 'desc');
 
         if (!$user->is_admin) {
             $query->where('user_id', $user->id);
@@ -34,7 +34,7 @@ class OrderController extends Controller
             return response()->json(['error' => 'Forbidden'], 403);
         }
 
-        return response()->json($order->load('items'));
+        return response()->json($order->load(['items', 'user']));
     }
 
     public function store(Request $request): JsonResponse
