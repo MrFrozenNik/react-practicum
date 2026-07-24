@@ -1,6 +1,6 @@
 .card {
   flex-direction: column;
   gap: calc(var(--spacing) * 2);
-  border-radius: 12px;
+  border-radius: var(--radius-xl);
   border: var(--border-width-base) solid var(--color-gray-200);
 }

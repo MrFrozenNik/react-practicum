@@ -9,7 +9,7 @@
 
 .comment {
   min-height: calc(var(--spacing) * 24);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   border: var(--border-width-base) solid var(--color-gray-200);
   font: inherit;
   resize: vertical;

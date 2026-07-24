@@ -17,11 +17,8 @@
   margin: 0 auto;
 }
 
-.h-screen {
-  height: 100vh;
-}
 
-.gap-2{
+.gap-2 {
   gap: calc(var(--spacing) * 2);
 }
 
@@ -37,17 +34,8 @@
   height: calc(var(--spacing) * 16);
 }
 
-.mx-auto {
-  margin: 0 auto;
-}
-.min-w-2xl{
-  min-width: 42rem;
-}
-.mb-auto{
-  margin-bottom: auto;
-}
 
-.grow-2{
+.grow-2 {
   flex-grow: 2;
 }
 

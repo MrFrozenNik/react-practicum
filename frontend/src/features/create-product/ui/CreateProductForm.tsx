@@ -60,7 +60,7 @@ export const CreateProductForm = ({onCreated}: CreateProductFormProps) => {
                 <Text as="p" size="sm">{error}</Text>
             )}
 
-            <Button type="submit" disabled={isSubmitting} className="submit">
+            <Button type="submit" disabled={isSubmitting}>
                 {isSubmitting ? "Добавляем..." : "Добавить"}
             </Button>
         </form>

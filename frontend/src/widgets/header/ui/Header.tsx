@@ -18,11 +18,11 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <div className={clsx(styles.container, "container h-16 flex items-center justify-between")}>
-                <div className={styles.left}>
+                <div className={clsx(styles.shrink0, "flex items-center")}>
                     <Icon name="logo" className={styles.logo} />
                 </div>
 
-                <nav className={styles.center}>
+                <nav className={clsx(styles.center, "flex items-center")}>
                     {NAV_LINKS.map(({label, to}) => (
                         <Button key={label} as={Link} to={to} kind="text" status="default">
                             {label}
@@ -30,7 +30,7 @@ export const Header = () => {
                     ))}
                 </nav>
 
-                <div className={styles.right}>
+                <div className={clsx(styles.shrink0, "flex items-center")}>
                     {isAuthenticated ? (
                         <Dropdown kind="filled" status="default" size="small">
                             <Dropdown.Trigger>{user?.name}</Dropdown.Trigger>

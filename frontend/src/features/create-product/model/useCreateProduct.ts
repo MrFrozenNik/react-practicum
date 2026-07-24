@@ -12,7 +12,7 @@ export const useCreateProduct = () => {
         try {
             return await createProduct(payload);
         } catch {
-            setError("Couldn't create a product");
+            setError("Не удалось создать продукт");
             return null;
         } finally {
             setIsSubmitting(false);

@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, type PropsWithChildren} from "react";
+import {useState, useEffect, type PropsWithChildren} from "react";
 import {CartContext} from "./CartContext";
 import {cartStorage} from "../lib/cartStorage";
 import type {CartContextValue, CartItem} from "./types";
@@ -34,12 +34,8 @@ export const CartProvider = ({children}: PropsWithChildren) => {
 
     const clear = () => setItems([]);
 
-    const totalCount = useMemo(
-        () => items.reduce((sum, i) => sum + i.quantity, 0),
-        [items]
-    );
 
-    return <CartContext.Provider value={{items, addItem, removeItem, updateQuantity, clear, totalCount}}>
+    return <CartContext.Provider value={{items, addItem, removeItem, updateQuantity, clear}}>
         {children}
     </CartContext.Provider>;
 };

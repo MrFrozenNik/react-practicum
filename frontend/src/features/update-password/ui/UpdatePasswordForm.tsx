@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import clsx from "clsx";
 import {type UpdatePasswordFormValues, updatePasswordSchema} from "@/features/update-password/model/schema.ts";
 import {updatePassword, UpdatePasswordError} from "@/features/update-password/api/updatePassword.ts";
 import styles from "@/shared/styles/UpdateForm.module.scss";
@@ -37,7 +38,7 @@ export const UpdatePasswordForm = () => {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className={clsx(styles.form, "flex")} onSubmit={handleSubmit(onSubmit)} noValidate>
             <Text as="h2" size="2xl" weight="bold" className={styles.title}>
                 Сменить пароль
             </Text>

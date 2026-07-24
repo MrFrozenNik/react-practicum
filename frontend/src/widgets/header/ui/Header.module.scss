@@ -1,27 +1,16 @@
-// src/widgets/header/Header.module.scss
 .header {
   width: 100%;
   background-color: var(--color-indigo-700);
 }
 
-
-.left {
-  display: flex;
-  align-items: center;
+.shrink0{
   flex-shrink: 0;
 }
 
 .center {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  gap: calc(var(--spacing) * 6);
 }
 
-.right {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
 
 .logo{
   color: var(--color-gray-100);

@@ -16,7 +16,7 @@ type ProductCardProps = {
 
 export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromCart, actions}: ProductCardProps) => {
     return (
-        <article className={styles.card}>
+        <article className={clsx(styles.card, "gap-2 p-4 flex")}>
             <Link to={`/products/${product.id}`} className={styles.titleLink}>
                 <Text size="xl" as="h3" weight="semibold" className="my-0 grow-2">
                     {product.title}
@@ -25,7 +25,7 @@ export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromC
             {product.description && (
                 <Text as="p" size="xs" className={clsx(styles.description)}>{product.description}</Text>
             )}
-            <div className={styles.footer}>
+            <div className={clsx(styles.footer, "flex items-center gap-2 justify-between")}>
                 <Text as="span" weight="semibold">{formatPrice(product.price)}</Text>
                 {actions ?? (
                     inCart ? (

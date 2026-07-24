@@ -17,7 +17,7 @@ export const ProductCatalog = () => {
     useEffect(() => {
         getProducts()
             .then(setProducts)
-            .catch(() => setError("Couldn't load products catalog"))
+            .catch(() => setError("Не удалось загрузить каталог"))
             .finally(() => setIsLoading(false));
     }, []);
 

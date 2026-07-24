@@ -11,5 +11,4 @@ export interface CartContextValue {
     removeItem: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
     clear: () => void;
-    totalCount: number;
 }

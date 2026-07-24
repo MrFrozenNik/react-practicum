@@ -78,27 +78,3 @@
     }
   }
 }
-
-
-@mixin breakpoint($name) {
-  @if not map.has-key($breakpoints, $name) {
-    @error 'Неизвестный breakpoint: #{$name}';
-  }
-
-  @media (min-width: map.get($breakpoints, $name)) {
-    @content;
-  }
-}
-
-
-@mixin breakpoint-max($name) {
-  @if not map.has-key($breakpoints, $name) {
-    @error 'Неизвестный breakpoint: #{$name}';
-  }
-
-  $value: map.get($breakpoints, $name) - 0.02rem;
-
-  @media (max-width: $value) {
-    @content;
-  }
-}

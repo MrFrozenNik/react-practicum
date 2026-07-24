@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useForm, Controller} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
+import clsx from "clsx";
 import {type UpdateNameFormValues, updateNameSchema} from "@/features/update-name/model/schema.ts";
 import {updateName, UpdateNameError} from "@/features/update-name/api/updateName.ts";
 import {useUser} from "@/entities/user";
@@ -36,7 +37,7 @@ export const UpdateNameForm = () => {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+        <form className={clsx(styles.form, "flex")} onSubmit={handleSubmit(onSubmit)} noValidate>
             <Text as="h2" size="2xl" weight="bold" className={styles.title}>
                 Изменить имя
             </Text>

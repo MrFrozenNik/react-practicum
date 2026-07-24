@@ -13,7 +13,7 @@ type ProductDetailsProps = {
 
 export const ProductDetails = ({product, inCart = false, onAddToCart, onRemoveFromCart}: ProductDetailsProps) => {
     return (
-        <article className={clsx(styles.details, "pt-8")}>
+        <article className={clsx(styles.details, "pt-8 flex")}>
             <Text as="h1" size="4xl" weight="bold" className="my-0">
                 {product.title}
             </Text>
@@ -27,7 +27,7 @@ export const ProductDetails = ({product, inCart = false, onAddToCart, onRemoveFr
                 </Text>
             )}
 
-            <div className={styles.footer}>
+            <div className={clsx(styles.footer, "mt-4 flex items-center justify-between")}>
                 <Text as="span" size="2xl" weight="semibold">
                     {formatPrice(product.price)}
                 </Text>

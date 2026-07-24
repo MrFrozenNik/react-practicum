@@ -10,7 +10,7 @@ export const ProfilePage = () => {
 
     return (
         <div className={clsx(styles.page, "container flex pb-8")}>
-            <Text as="h1" size="4xl" weight="bold" className="">
+            <Text as="h1" size="4xl" weight="bold">
                 Личный кабинет
             </Text>
 

@@ -1,7 +1,6 @@
 .details {
-  display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: calc(var(--spacing) * 4);
 }
 
 .description {
@@ -14,9 +13,5 @@
 }
 
 .footer {
-  margin-top: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: calc(var(--spacing) * 4);
 }
