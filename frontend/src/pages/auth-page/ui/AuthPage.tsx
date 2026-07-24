@@ -19,7 +19,7 @@ export const AuthPage = () => {
 
     return (
         <div className={clsx(styles.page, "container flex py-6 items-center")}>
-            <Button as={Link} to="/" kind="text" status="default" className={styles.back}>
+            <Button as={Link} to="/" kind="text" status="primary" className={styles.back}>
                 ← На главную
             </Button>
 
