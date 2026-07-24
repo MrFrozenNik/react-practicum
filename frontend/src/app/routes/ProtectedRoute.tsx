@@ -1,6 +1,6 @@
 import {Navigate, Outlet, useLocation} from "react-router-dom";
 import {useUser} from "@/entities/user";
-import {LoadingPlaceholder} from "@/shared/ui/loading-placeholder";
+import {LoadingPlaceholder, Text} from "@/shared/ui";
 
 type ProtectedRouteProps = {
     requireAdmin?: boolean;
@@ -17,7 +17,11 @@ export const ProtectedRoute = ({requireAdmin = false}: ProtectedRouteProps) => {
     }
 
     if (requireAdmin && !user?.is_admin) {
-        return <Navigate to="/" replace/>;
+        return (
+            <div className="container py-6">
+                <Text as="p" size="lg" weight="semibold">Вы не админ!</Text>
+            </div>
+        );
     }
 
     return <Outlet/>;

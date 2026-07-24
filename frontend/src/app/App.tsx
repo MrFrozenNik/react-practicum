@@ -7,6 +7,7 @@ import {HomePage} from "@/pages/home-page";
 import {ProductPage} from "@/pages/product-page/ui/ProductPage.tsx";
 import {CartPage} from "@/pages/cart-page";
 import {OrdersPage} from "@/pages/orders-page";
+import {AdminPage} from "@/pages/admin-page";
 import {useUser} from "@/entities/user";
 import {LoadingPlaceholder} from "@/shared/ui/loading-placeholder";
 
@@ -23,6 +24,9 @@ function App() {
                 <Route element={<ProtectedRoute/>}>
                     <Route path="/profile" element={<ProfilePage/>}/>
                     <Route path="/orders" element={<OrdersPage/>}/>
+                </Route>
+                <Route element={<ProtectedRoute requireAdmin/>}>
+                    <Route path="/admin" element={<AdminPage/>}/>
                 </Route>
                 <Route path="/cart" element={<CartPage/>}/>
             </Route>

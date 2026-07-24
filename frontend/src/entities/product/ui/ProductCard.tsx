@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import {Link} from "react-router-dom";
+import type {ReactNode} from "react";
 import type {Product} from "../model/types";
 import styles from "./ProductCard.module.scss";
 import {formatPrice} from "@/shared/lib/formatPrice";
@@ -10,9 +11,10 @@ type ProductCardProps = {
     inCart?: boolean;
     onAddToCart?: (product: Product) => void;
     onRemoveFromCart?: (product: Product) => void;
+    actions?: ReactNode;
 };
 
-export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromCart}: ProductCardProps) => {
+export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromCart, actions}: ProductCardProps) => {
     return (
         <article className={styles.card}>
             <Link to={`/products/${product.id}`} className={styles.titleLink}>
@@ -45,6 +47,11 @@ export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromC
                     </Button>
                 )}
             </div>
+            {actions && (
+                <div className="mt-2">
+                    {actions}
+                </div>
+            )}
         </article>
     );
 };
