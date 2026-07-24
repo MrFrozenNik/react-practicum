@@ -17,13 +17,10 @@ let isRefreshing = false;
 
 let queue: Array<(err: unknown) => void> = [];
 
-apiClient.interceptors.response.use(
-    (response) => response,
+apiClient.interceptors.response.use((response) => response,
     async (error) => {
         const originalRequest = error.config;
-
         if (error.response?.status !== 401 || originalRequest._retry) return Promise.reject(error);
-
         const authUrls = ["/auth/login", "/auth/register", "/auth/refresh"];
         if (authUrls.some((u) => originalRequest.url?.includes(u))) {
             return Promise.reject(error);
