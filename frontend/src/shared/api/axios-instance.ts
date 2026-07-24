@@ -2,7 +2,7 @@ import axios, {type AxiosInstance} from "axios";
 import {tokenStorage} from "@/shared/api/token-storage.ts";
 
 export const apiClient: AxiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000/api",
     withCredentials: true,
 })
 
