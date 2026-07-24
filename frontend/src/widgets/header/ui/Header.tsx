@@ -9,7 +9,7 @@ const NAV_LINKS = [
     {label: "Каталог", to: "/"},
     {label: "Корзина", to: "/cart"},
     {label: "Заказы", to: "/orders"},
-    {label: "Админка", to: "/orders"}
+    {label: "Админка", to: "/admin"}
 ];
 
 export const Header = () => {

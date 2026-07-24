@@ -1,0 +1,9 @@
+.page {
+  gap: calc(var(--spacing) * 6);
+  flex-direction: column;
+}
+
+.list {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: calc(var(--spacing) * 4);
+}

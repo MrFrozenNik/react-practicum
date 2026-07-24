@@ -27,31 +27,28 @@ export const ProductCard = ({product, inCart = false, onAddToCart, onRemoveFromC
             )}
             <div className={styles.footer}>
                 <Text as="span" weight="semibold">{formatPrice(product.price)}</Text>
-                {inCart ? (
-                    <Button
-                        status="primary"
-                        kind="outlined"
-                        size="small"
-                        onClick={() => onRemoveFromCart?.(product)}
-                    >
-                        Удалить
-                    </Button>
-                ) : (
-                    <Button
-                        status="primary"
-                        kind="filled"
-                        size="small"
-                        onClick={() => onAddToCart?.(product)}
-                    >
-                        В корзину
-                    </Button>
+                {actions ?? (
+                    inCart ? (
+                        <Button
+                            status="primary"
+                            kind="outlined"
+                            size="small"
+                            onClick={() => onRemoveFromCart?.(product)}
+                        >
+                            Удалить
+                        </Button>
+                    ) : (
+                        <Button
+                            status="primary"
+                            kind="filled"
+                            size="small"
+                            onClick={() => onAddToCart?.(product)}
+                        >
+                            В корзину
+                        </Button>
+                    )
                 )}
             </div>
-            {actions && (
-                <div className="mt-2">
-                    {actions}
-                </div>
-            )}
         </article>
     );
 };
